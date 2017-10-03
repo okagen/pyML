@@ -22,8 +22,8 @@ pip install keras==2.0.5
 ```
 To check TensorFlow and Keras have been installed correctly. 
 ```python
-conda install -c conda-forge tensorflow=1.1.0
-pip install keras==2.0.5
+import tensorflow as tf
+import keras
 ```
 
 Usage
