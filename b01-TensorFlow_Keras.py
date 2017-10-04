@@ -51,16 +51,49 @@ print('LEN of tgt_test :', len(tgt_test))
 import keras
 from keras.layers import Dense, Activation
 
-# モデルを定義
+# モデルを定義　(Sequential（系列）モデルは層を積み重ねたものです．)
 model = keras.models.Sequential()
 # 入力=4、隠れ層=32
 model.add(Dense(units=32, input_dim=4))
-# 活性化関数を設定
+# 隠れ層の活性化関数を設定
+# --- 活性化関数 ---
+# -1 <= val <= 1
+#   ソフトサイン（softsign）
+#   ハイパボリックタンジェント（tanh）
+# 0 <= val <= 1
+#   シグモイド関数（sigmoid）
+#   ハードシグモイド（hard_sigmoid） 折れ線
+# 0 <= val
+#   ソフトプラス（softplus）　
+#   ランプ関数（relu） 折れ線
+# その他
+#  線形関数（linear）　係数をかけてバイアスを加える
+#　　ソフトマックス（softmax） 層から出力されたすべての値に指数関数をかけ正にし）、その和を1に正規化する。確率として判断できる。
 model.add(Activation('relu'))
+
 # 出力=3
 model.add(Dense(units=3))
-# 活性化関数を設定
+# 出力層の活性化関数を設定
 model.add(Activation('softmax'))
+
+# 目的関数（loss）
+#  平均二乗誤差（mse：差の2乗の和）
+#  平均絶対誤差（msa：差の絶対値の和）
+#  平均絶対誤差率（mspa：差を正解の値で割った値（誤差率）の絶対値の和）
+#  対数平均二乗誤差（msle：「1を加えた値の対数」の差の2乗の和）
+#  ヒンジ損失の和（hinge）
+#  ヒンジ損失の二乗の和（squared_hinge）
+#  2クラス分類時の交差エントロピー（binary_crossentropy）
+#  Nクラス分類時の交差エントロピー（categorical_crossentropy）
+#  スパースなNクラス分類交差エントロピー（sparse_categorical_crossentropy）
+#  KLダイバージェンス（kld）
+#  poisson
+#  コサイン類似度を負にしたもの（cosine_proximity）
+# 最適化手法（optimizer）
+#  optimizer='sgd' : Stochastic Gradient Descent : 確率的勾配降下法
+#  sgd, rsmprop, adagrad, adadelta, adam, adamax, nadam
+# 評価指数
+#  metrics=['accuracy'] : テストデータに対してAccuracy（正答率）を計算。
 model.compile(loss='sparse_categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
 
 #-------------------------------
@@ -72,7 +105,8 @@ model.fit(dat_train, tgt_train, epochs=100)
 # testデータを用いてmodelを評価
 score = model.evaluate(dat_test, tgt_test, batch_size=1)
 print('----------------',)
-print('accuracy =', score[1] )
+print('test loss =', score[0] )
+print('test accuracy =', score[1] )
 
 #-------------------------------
 # 新しいデータを、modelで分類
