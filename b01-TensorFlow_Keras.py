@@ -31,15 +31,19 @@ print('LEN of iris.target :', len(iris.target))
 
 #-------------------------------
 # iris.dataとiris.targetの対応を維持したままシャッフルし、80%を学習データに、残りの20％をテストデータに振り分ける。
-from sklearnmodel_selection import train_test_split as split
+from sklearn.cross_validation import train_test_split as split
+
 dat_train, dat_test, tgt_train, tgt_test = split(iris.data, iris.target, train_size=0.8)
 print('----------------')
 print(dat_train)
 print('LEN of dat_train :', len(dat_train))
+print('----------------')
 print(dat_test)
 print('LEN of dat_test :', len(dat_test))
+print('----------------')
 print(tgt_train)
 print('LEN of tgt_train :', len(tgt_train))
+print('----------------')
 print(tgt_test)
 print('LEN of tgt_test :', len(tgt_test))
 
@@ -48,7 +52,7 @@ import keras
 from keras.layers import Dense, Activation
 
 # モデルを定義
-model = keras.models.Swquential()
+model = keras.models.Sequential()
 # 入力=4、隠れ層=32
 model.add(Dense(units=32, input_dim=4))
 # 活性化関数を設定
@@ -61,22 +65,27 @@ model.compile(loss='sparse_categorical_crossentropy', optimizer='sgd', metrics=[
 
 #-------------------------------
 # modelの学習開始
-# 120個データの学習を100回繰り返す(epochs=100)。
+# 150x0.8=120個データの学習を100回繰り返す(epochs=100)。
 model.fit(dat_train, tgt_train, epochs=100)
 
 #-------------------------------
 # testデータを用いてmodelを評価
 score = model.evaluate(dat_test, tgt_test, batch_size=1)
+print('----------------',)
 print('accuracy =', score[1] )
-
 
 #-------------------------------
 # 新しいデータを、modelで分類
+# がくの長さ - sepal length in cm
+# がくの幅 - sepal width in cm
+# 花びらの長さ - petal length in cm
+# 花びらの幅 - petal width in cm
 import numpy as np
-nDat = np.array([[5.1, 3.5, 1.4, 0.2]])
+nDat = np.array([[3.5, 3.5, 3.5, 3.1]])
 result = model.predict(nDat)
-result
+print('----------------',)
+print("result :", result)
 
 # 一番確率が高いラベルを表示
 print('----------------')
-result.argmax()
+print("index of the maximum value of the result :",  result.argmax())
