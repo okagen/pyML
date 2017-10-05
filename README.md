@@ -15,13 +15,18 @@ Requirements
 - Keras 2.0.5
 
 
-Install TensorFlow and Keras
+Install TensorFlow, Keras and graphviz.
 ```python
 conda install -c conda-forge tensorflow=1.1.0
 pip install keras==2.0.5
+conda install graphviz
+pip install graphviz 
 ```
-
-
+The path of graphviz was needed to be added to system PATH in my case.
+```PATH
+C:\Program Files\Anaconda3\Library\bin\graphviz
+```
+  
 Usage
 ------------------
 later
