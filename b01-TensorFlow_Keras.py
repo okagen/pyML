@@ -99,7 +99,17 @@ model.compile(loss='sparse_categorical_crossentropy', optimizer='sgd', metrics=[
 #-------------------------------
 # modelの学習開始
 # 150x0.8=120個データの学習を100回繰り返す(epochs=100)。
-model.fit(dat_train, tgt_train, epochs=100)
+history = model.fit(dat_train, tgt_train, epochs=100)
+
+# 精度の履歴をプロット
+import matplotlib.pyplot as plt
+plt.plot(history.history['acc'],"o-",label="accuracy")
+plt.plot(history.history['loss'],"o-",label="loss")
+plt.title('model accuracy and loss rate')
+plt.xlabel('epoch')
+plt.ylabel('accuracy')
+plt.legend(loc="best")
+plt.show()
 
 #-------------------------------
 # testデータを用いてmodelを評価
@@ -123,3 +133,8 @@ print("result :", result)
 # 一番確率が高いラベルを表示
 print('----------------')
 print("index of the maximum value of the result :",  result.argmax())
+
+# モデルを可視化
+from keras.utils import plot_model
+plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
+
