@@ -20,7 +20,7 @@ Install TensorFlow, Keras, graphviz, and FlikrAPI.
 conda install -c conda-forge tensorflow=1.1.0
 pip install keras==2.0.5
 conda install graphviz
-pip install graphviz
+pip install pydot_ng
 pip install flickrapi
 ```
 The path of graphviz was needed to be added to system PATH in my case.
