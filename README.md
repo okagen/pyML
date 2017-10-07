@@ -46,7 +46,7 @@ Some Handy Links
 
 [Keras](https://keras.io/ja/) - Japanese Keras official site.
 
-[Flicker The App Garden](https://www.flickr.com/services/api/) - To use Flicker's API.
+[Flickr The App Garden](https://www.flickr.com/services/api/) - To use Flicker's API.
 
-[Flicker The App Garden flickr.photos.search](https://www.flickr.com/services/api/flickr.photos.search.html) - Detail : flickr.photos.search
+[Flickr The App Garden flickr.photos.search](https://www.flickr.com/services/api/flickr.photos.search.html) - Detail : flickr.photos.search
 
