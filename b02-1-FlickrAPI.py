@@ -12,20 +12,20 @@ key = ""
 secret = ""
 
 # 検索キーワード
-keyword = "cat"
+kwd = "cow"
 
 # 検索件数＝ダウンロード数
-countPict = 500
+countPict = 70
 
 # 画像保存先のディレクトリ 無ければ作る
-savedir = "./" + keyword
-if not os.path.exists(savedir):
-    os.mkdir(savedir)
+folder = "./" + kwd
+if not os.path.exists(folder):
+    os.mkdir(folder)
 
 # Flickr写真を検索 結果をJSONで取得
 flickr = FlickrAPI(key, secret, format="parsed-json")
 res = flickr.photos.search(
-    text = keyword,
+    text = kwd,
     per_page = countPict,
     media = "photos",
     sort = "relevance",
@@ -36,14 +36,14 @@ res = flickr.photos.search(
 photos = res["photos"]
 pprint(photos)
 
-# ダウンロード後の待機時間
+# ダウンロード後の待機時間 Flickrサーバへの負荷軽減の為
 wait_time = 1
 
 # 画像をダウンロード
 try:
     for i , photo in enumerate(photos["photo"]):
         url_q = photo["url_q"]
-        filepath = savedir + "/" + photo["id"] + ".jpg"
+        filepath = folder + "/" + photo["id"] + ".jpg"
         if os.path.exists(filepath): continue
 
         urlretrieve(url_q, filepath)
