@@ -22,6 +22,7 @@ pip install keras==2.0.5
 conda install graphviz
 pip install pydot_ng
 pip install flickrapi
+conda install scikit-learn
 ```
 The path of graphviz was needed to be added to system PATH in my case.
 ```PATH
