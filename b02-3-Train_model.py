@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Train model
+Train the model
 """
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from keras.layers import Activation, Dropout, Dense
-from keras.utils import np_utils
+from keras.layers import Activation, Dense
 import numpy as np
 
 
@@ -79,5 +78,8 @@ if __name__ == "__main__":
     # モデルを可視化
     from keras.utils import plot_model
     plot_model(model, to_file='b02-3-model.png', show_shapes=True, show_layer_names=True)
+    
+    # 学習済みモデルの「重み」を保存
+    model.save_weights("./b02-3-CatCowEagle.hdf5")
     
 
