@@ -17,7 +17,7 @@ Requirements
 
 Install TensorFlow, Keras, graphviz, and FlikrAPI.
 ```python
-conda install -c conda-forge tensorflow=1.1.0
+conda install -c conda-forge tensorflow 
 pip install keras==2.0.5
 conda install graphviz
 pip install pydot_ng
